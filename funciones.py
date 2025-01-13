@@ -1,9 +1,8 @@
-
-
 import csv
 import random
 import requests
 import json
+import matplotlib.pyplot as plt
 
 
 '''
@@ -136,6 +135,8 @@ def solicitar_y_añadir_a_lista(mensaje:str="Ingrese un elemento: ",lista:list=[
         castear_dato(elemento)
         lista.append(elemento)
     return lista
+
+
 '''
 Situacionales
 '''
@@ -309,6 +310,8 @@ def rellenar_cadena(
     for _ in range(cantidad_a_rellenar):
         relleno += elemento_relleno
     return relleno + cadena
+
+
 #Descuentos sabiendo la cantidad de litros vendidos y el importe a pagar 
 def escala_descuentos(importe_total, litros_vendidos):
     if litros_vendidos > 500:
@@ -320,6 +323,7 @@ def escala_descuentos(importe_total, litros_vendidos):
     else:
         importe_final = importe_total
     return importe_final
+
 
 #Escala de precios segun el usuario combine, 
 # Opción de procesador, Opcion de memoria y si desea extender el Disco
@@ -355,9 +359,113 @@ def compra_combinada(OP, OM, OD):
     return p
 
 
+def dibujar_grafico_matplotlib(
+        x:list,y:list, marker, c, set_facecolor, set_xlabel, set_ylabel 
+                    ):
+    """
+    Dibuja un grafico con matplotlib
+    Recibe: valores del eje y, valores del eje x
+    Retorna:
+    """
+
+    fig = plt.figure()
+    ax= fig.add_subplot()
+
+    ax.plot(x, y, marker= marker, c= c)
+    ax.set_facecolor(set_facecolor)
+    ax.set_xlabel(set_xlabel)
+    ax.set_ylabel(set_ylabel)
+    plt.show()
+
+
+def reordenar_letras_de_una_palabra(palabra:str)->str:
+  """
+  La funcion recibe una palabra cualquiera y reordena sus letras segun:
+  Primero todas las letras minúsculas ordenadas de menor a mayor.
+  Luego todas las letras mayúsculas ordenadas de menor a mayor.
+  Todos los dígitos impares ordenados de menor a mayor.
+  Todos los dígitos pares ordenados de menor a mayor.
+  La palabra OrDenar1234 debería formar la siguiente nueva palabra según el
+  criterior anterior: --> aenrrDO1324
+  """
+  resultado = ""
+  lista_objetivo = []
+  pre_resultado = []
+  lista_minusculas = []
+  lista_mayusculas = []
+  lista_impares = []
+  lista_pares = []
+
+  for i in palabra:
+      lista_objetivo.append(i)
+
+  #Guardar en pre_resultado las letras ordenadas de menor a mayor 
+  while len(lista_objetivo) != 0:
+    min_caracter = "}"
+    for i in lista_objetivo:
+      if i < min_caracter:
+        min_caracter = i
+    pre_resultado.append(min_caracter)
+    lista_objetivo.remove(min_caracter)
+
+  #lista de minusculas
+  for minusc in pre_resultado:
+    minusc_int = False
+    for j in range(10):
+      j = str(j)
+      if minusc == j:
+        minusc_int = True
+    if minusc_int == False:
+      if minusc.islower() == True:
+        lista_minusculas.append(minusc)
+
+  #lista de mayusculas
+  for may in pre_resultado:
+    may_int = False
+    for j in range(10):
+      j = str(j)
+      if may == j:
+        may_int = True
+    if may_int == False:
+      if may.isupper() == True:
+        lista_mayusculas.append(may)
+
+
+  #lista de impares
+  for i in pre_resultado:
+    es_par = False
+    for j in range(10):
+      j = str(j)
+      if i == j:
+        i = int(i)
+        if i % 2 == 0:
+          es_par = True
+        elif es_par == False:
+          i = str(i)
+          lista_impares.append(i)
+
+  #lista de pares
+  for i in pre_resultado:
+    for j in range(10):
+      j = str(j)
+      if i == j:
+        i = int(i)
+        if i % 2 == 0:
+          i = str(i)
+          lista_pares.append(i)
+
+  unir_lista = lista_minusculas + lista_mayusculas + lista_impares + lista_pares
+
+  for i in unir_lista:
+      resultado += i
+
+  return resultado
+
+
+
+
 # Matemáticas
 
-#Comprobar si un numero es multiplo de otro
 def es_multiplo():
     es_multiplo = False
     numero = int(input("Ingrese un numero: "))
