@@ -138,25 +138,28 @@ def descuento_condicionado(importe_venta, montos_descuentos:dict):
     return importe_final
 
 
-#Obtener el maximo y minimo de una lista random
-def may_men():
-    numeros = [random.randint(0,50) for x in range(5)]
-    
-    if numeros[0] > numeros[1]:
-        mayor = numeros[0]
-        menor = numeros[1]
-    elif numeros[0] < numeros[1]:
-        menor = numeros[0]
-        mayor = numeros[1]
-    elif numeros [0] == numeros[1]:
-        mayor = numeros[0]
-        menor = numeros [1]
-    
-    for x in numeros:      
+def obtener_menor_y_mayor_en_lista(lista_numeros:list)->list:
+    """
+    Encuentra el número más chico y el número más grande dentro de una lista
+    de números.
+    Recibe: la lista de números
+    Retorna: una lista con el número más pequeño y más grande respectivamente.
+    """
+    if lista_numeros[0] > lista_numeros[1]:
+        mayor = lista_numeros[0]
+        menor = lista_numeros[1]
+    elif lista_numeros[0] < lista_numeros[1]:
+        menor = lista_numeros[0]
+        mayor = lista_numeros[1]
+    elif lista_numeros [0] == lista_numeros[1]:
+        mayor = lista_numeros[0]
+        menor = lista_numeros [1]
+    for x in lista_numeros:      
         if x > mayor:
             mayor = x
         elif x < menor:
-            menor = x    
+            menor = x
+    return [menor, mayor]
 
 
 def cortar_iterable(iterable:str|list, desde:int, hasta:int)->str|list:
