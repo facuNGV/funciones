@@ -100,11 +100,8 @@ def solicitar_y_validar_numero_flotante(mensaje:str, mensaje_error:str)->int:
     return numero
 
 
-def solicitar_elementos_para_lista(
-        usuario_define_cantidad_elementos:bool,
-        lista:list=[],
-        mensaje:str="Elemento a añadir: ",
-        cantidad_elementos:int=4
+def solicitar_elementos_para_lista( usuario_define_cantidad_elementos:bool,
+        lista:list=[], mensaje:str="Elemento a añadir: ", cantidad_elementos:int=4
         )->list:
     """
     Segun se indique por parametro, pide(o no) al usuario la cantidad de 
@@ -125,13 +122,19 @@ def solicitar_elementos_para_lista(
 '''
 Situacionales
 '''
-def descuento_condicionado(importe_venta):
-    if importe_venta < 1000:
-        importe_final = importe_venta
-    elif importe_venta >= 1000 and importe_venta < 5000:
-        importe_final = importe_venta * 0,90
-    elif importe_venta >= 5000:
-        importe_final = importe_venta * 0,82
+def descuento_condicionado(importe_venta, montos_descuentos:dict):
+    """
+    A partir de un diccionario(clave=tupla, valor=numero) y un importe, segun
+    en que rango(clave) se encuentre el importe, aplicará el descuento(valor) 
+    correspondiente.
+    Recibe: el importe de la venta, el diccionario con los rangos vinculados
+    a los descuentos.
+    Retorna: el importe final a pagar con el descuento aplicado 
+    """
+    importe_final = importe_venta
+    for clave, valor in montos_descuentos.items():
+        if importe_venta > clave[0] and importe_venta < clave[1]:
+            importe_final = importe_venta - (importe_venta * valor)
     return importe_final
 
 
