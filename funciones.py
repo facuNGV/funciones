@@ -162,29 +162,14 @@ def obtener_menor_y_mayor_en_lista(lista_numeros:list)->list:
     return [menor, mayor]
 
 
-def cortar_iterable(iterable:str|list, desde:int, hasta:int)->str|list:
+def cortar_diccionario(diccionario:dict, desde:int, hasta:int)->dict:
     """
-    Esta función recorta un iterable según las posiciones que se le
-    pasen por parametro (0, n). Entre esas dos posiciones (inclusive) 
-    es que se recortara el iterable. 
-    Recibe: El iterable y las posiciones en las que queremos cortar
-    Retorna: El iterable recortado
+    Recorta un diccionario según las posiciones que se le pasen por parámetro.
+    Recibe: El diccionario y las posiciones en las que queremos cortar
+    Retorna: El diccionario recortado
     """
-    contador = 0
-    if type(iterable) == list:
-        resultado = []
-        for letra in iterable:
-            if contador >= desde and contador < hasta:
-                resultado += [letra]
-            contador += 1
-    else:
-        resultado = ""
-        for letra in iterable:
-            if contador >= desde and contador < hasta:
-                resultado += letra
-            contador += 1
-
-    return resultado
+    slice_diccionario = dict(list(diccionario.items())[desde:hasta])
+    return slice_diccionario
 
 
 def comprobar_numero_dentro_de_rango(
