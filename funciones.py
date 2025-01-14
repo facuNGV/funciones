@@ -164,7 +164,9 @@ def obtener_menor_y_mayor_en_lista(lista_numeros:list)->list:
 
 def cortar_diccionario(diccionario:dict, desde:int, hasta:int)->dict:
     """
-    Recorta un diccionario según las posiciones que se le pasen por parámetro.
+    Actúa como si los ítems de un diccionario fueran indexables y recorta el
+    diccionario dejando solo desde el ítem, hasta el ítem que se le indique
+    (no incluye al último).
     Recibe: El diccionario y las posiciones en las que queremos cortar
     Retorna: El diccionario recortado
     """
