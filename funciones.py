@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 '''
 Interacción con Usuario
 '''
-def solicitar_y_validar_numero(mensaje:str)->int|float:
+def solicitar_y_validar_numero(mensaje:str, mensaje_error:str)->int|float:
     """
     Esta función pide un dato por consola y valida que su valor sea numérico
     Recibe: El mensaje a imprimir al usuario
@@ -16,59 +16,53 @@ def solicitar_y_validar_numero(mensaje:str)->int|float:
     """
     numero = input(mensaje)
     while determinar_numero(numero) == False:
-        numero = input(mensaje)
+        numero = input(mensaje_error)
     numero = castear_dato(numero)
     return numero
 
 
-def solicitar_y_validar_numero_en_rango(mensaje:str, minimo:int, maximo:int)->int:
+def solicitar_y_validar_numero_en_rango(
+        mensaje:str, mensaje_error:str, minimo:int, maximo:int
+                                        )->int:
     """
     Esta función pide un numero al usuario y valida que se encuentre
     dentro de un rango numérico determinado (inclusive)
     Recibe: Un mensaje que se imprimira al usuario, un rango numérico
-    Retorna: El mismo número validado y casteado
+    Retorna: El número seleccionado por el usuario, validado y casteado
     """
     numero = input(mensaje)
     while comprobar_numero_dentro_de_rango(numero, minimo, maximo) != True:
-        numero = input(mensaje)
+        numero = input(mensaje_error)
     numero = castear_dato(numero)
     return numero
 
 
-def solicitar_y_validar_cadena(
-        mensaje:str, opciones:list|str, longitud:int=None, 
-        mensaje_error:str="[Error]"
+def solicitar_y_validar_string(
+        mensaje:str, opciones:list|str, 
+        mensaje_error:str, longitud:int=None
         )->str:
     """
-    Esta función pide al usuario que ingrese una cadena, valida que el usuario
-    ingrese un dato dentro de las opciones disponibles, y de la longitud que se
-    indique por parametro si es el caso.
+    Pide al usuario que ingrese un string, valida que sea una de las opciones
+    dadas, y de la longitud que se indique por parametro si es el caso.
     Recibe: El mensaje a mostrar al usuario, un iterable con las opciones
-    disponibles, opcionalmente una longitud para la cadena, y opcionalmente un 
-    mensaje de error para el usuario
-    Retorna: El dato elegido por el usuario validado.
+    disponibles, opcionalmente una longitud maxima qude debe tener la cadena, 
+    y opcionalmente un mensaje de error para el usuario.
+    Retorna: La cadena elegida por el usuario validada.
     """
-    cadena = input(mensaje)
+    string_seleccionado = input(mensaje)
     if longitud != None:
-        while medir_coleccion(cadena) != longitud:
-            cadena = input(f"{mensaje_error} {mensaje}")
-
-    while (cadena in opciones) == False:
-        cadena = input(f"{mensaje_error}\n{mensaje}")
-    
-    return cadena
+        while len(string_seleccionado) != longitud:
+            string_seleccionado = input(mensaje_error)
+    while (string_seleccionado in opciones) == False:
+        string_seleccionado = input(mensaje_error)
+    return string_seleccionado
 
 
-def generar_menu(
-        items:str, opciones:list,
-        mensaje:str=f"\nSeleccione una de las opciones disponibles: ",
-        mensaje_error:str=""       
-        ):
+def mostrar_menu(items:str, opciones:list):
     """
-    Esta función muestra por consola un menú de opciones que el usuario puede
-    seleccionar, y solicita al usuario que seleccione una de las disponibles.
-    Recibe: Los items de cada una de las opciones, las opciones en sí, un 
-    mensaje opcional que mostrar al usuario, y un mensaje opcional en caso de error.
+    Muestra por consola un menú de opciones disponibles para el usuario.
+    Recibe: Los items de cada una de las opciones ("abcd..."), y las opciones
+    en sí.
     Retorna: La opcion seleccionada por el usuario una vez validada.
     """
     print("-------------------------MENÚ-------------------------------------")
@@ -77,59 +71,50 @@ def generar_menu(
     for i in range(len(opciones)):
         print(f"|               {items[i]}) {opciones[i]}")
     print("------------------------------------------------------------------")
-    opcion_seleccionada = solicitar_y_validar_cadena(mensaje,items,1,mensaje_error)
-    print("------------------------------------------------------------------")
     print(f"\n\n")
-    return opcion_seleccionada
 
 
-def solicitar_y_validar_numero_entero(mensaje:str)->int:
+def solicitar_y_validar_numero_entero(mensaje:str, mensaje_error:str)->int:
     """
-    Esta función pide un dato por consola y valida que sea un número entero.
-    Recibe: El mensaje a imprimir al usuario.
-    Retorna: El numero validado.
+    Pide un número entero por consola y valida que lo sea.
+    Recibe: Mensaje a imprimir al usuario, mensaje de error.
+    Retorna: El número validado.
     """
     numero = input(mensaje)
     while (determinar_numero(numero) == False) or (determinar_numero(numero) == 'float'):
-        numero = input(mensaje)
+        numero = input(mensaje_error)
     numero = castear_dato(numero)
     return numero
 
 
-def solicitar_y_validar_numero_flotante(mensaje:str)->int:
+def solicitar_y_validar_numero_flotante(mensaje:str, mensaje_error:str)->int:
     """
-    Esta función pide un dato por consola y valida que sea un número entero.
-    Recibe: El mensaje a imprimir al usuario.
+    Pide un flotante por consola y valida que lo sea.
+    Recibe: El mensaje a imprimir al usuario, el mensaje de error.
     Retorna: El numero validado.
     """
     numero = input(mensaje)
     while (determinar_numero(numero) == False) or (determinar_numero(numero) == 'int'):
-        numero = input(mensaje)
+        numero = input(mensaje_error)
     numero = castear_dato(numero)
     return numero
 
 
-def solicitar_y_validar_numero_entero_en_rango(
-        mensaje:str, minimo:int, maximo:int
-        )->int:
+def solicitar_elementos_para_lista(
+        usuario_define_cantidad_elementos:bool,
+        lista:list=[],
+        mensaje:str="Elemento a añadir: ",
+        cantidad_elementos:int=4
+        )->list:
     """
-    Esta función pide un entero al usuario y valida que se encuentre
-    dentro de un rango numérico determinado (inclusive)
-    Recibe: Un mensaje que se imprimira al usuario, un rango numérico
-    Retorna: El mismo número validado y casteado
+    Segun se indique por parametro, pide(o no) al usuario la cantidad de 
+    elementos a añadir a una lista, pide al usuario cuales añadir, y los añade.
+    Recibe: True si el usuario define la cantidad de elementos sino False y 
+    opcionales.
+    Retorna: la lista 
     """
-    numero = input(mensaje)
-    while (comprobar_numero_dentro_de_rango(numero, minimo, maximo) != True) or (
-            determinar_numero(numero) != 'int'
-            ):
-        numero = input(f"[ERROR] {mensaje}")
-    numero = castear_dato(numero)
-    return numero
-
-
-def solicitar_y_añadir_a_lista(mensaje:str="Ingrese un elemento: ",lista:list=[])->list:
-    
-    cantidad_elementos = solicitar_y_validar_numero_entero("¿Cuantos elementos añade?: ")
+    if usuario_define_cantidad_elementos == True:
+        cantidad_elementos = solicitar_y_validar_numero_entero("¿Cuantos elementos añade?: ")
     for _ in range(cantidad_elementos):
         elemento = input(mensaje)
         castear_dato(elemento)
@@ -305,7 +290,7 @@ def rellenar_cadena(
         mensaje:str, minimo_digitos:int=8, elemento_relleno:str="0"
         )->str:
     cadena = input(mensaje)
-    cantidad_a_rellenar = minimo_digitos - medir_coleccion(cadena)
+    cantidad_a_rellenar = minimo_digitos - len(cadena)
     relleno = ""
     for _ in range(cantidad_a_rellenar):
         relleno += elemento_relleno
@@ -605,10 +590,10 @@ def solicitar_subir_elementos_en_indice(lista:list)->None:
 # here
 def buscar_elemento_en_lista(lista:list, dato:int)->list|None:
     coincidencias = []
-    for i in range(medir_coleccion(lista)):
+    for i in range(len(lista)):
         if dato == lista[i]:
             coincidencias += [i]
-    if medir_coleccion(coincidencias) == 0:
+    if len(coincidencias) == 0:
         coincidencias = None
     return coincidencias
 
