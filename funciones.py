@@ -461,8 +461,12 @@ def multiplicar_por_varios_numeros(numero:int|float, desde:int, hasta:int)->list
     return resultados
 
 
-#Calcular promedio de una lista de numeros
-def promedio(numeros):
+def calcular_promedio(numeros:list)->int|float:
+    """
+    Calcula cual es el número promedio en una lista de números.
+    Recibe: Una lista de números.
+    Retorna: el promedio de estos números. 
+    """
     if len(numeros) != 0:
         promedio = sum(numeros) / len(numeros)
     elif numeros == 0:
