@@ -119,6 +119,30 @@ def solicitar_elementos_para_lista( usuario_define_cantidad_elementos:bool,
     return lista
 
 
+def solicitar_y_rellenar_cadena(
+        mensaje:str, posicion:str, minimo_caracteres:int=8, 
+        elemento_relleno:str="0"
+        )->str:
+    """
+    Solicita una cadena y la rellena con algun caracter hasta llegar a una
+    determinada cantidad de caracteres minimos. Se puede indicar si rellenar
+    la cadena adelante o detras.
+    Recibe: mensaje a mostrar al usuario, posicion(antes/despues) en la que
+    se colocara el relleno, minimo de caracteres, el elemento de relleno
+    Retorna: la cadena rellenada 
+    """
+    cadena = input(mensaje)
+    cantidad_a_rellenar = minimo_caracteres - len(cadena)
+    relleno = ""
+    for _ in range(cantidad_a_rellenar):
+        relleno += elemento_relleno
+    if posicion == "antes":
+        retorno = relleno + cadena
+    elif posicion == "despues":
+        retorno = cadena + relleno
+    return retorno
+
+
 
 
 """
@@ -261,17 +285,6 @@ def castear_dato(dato:str|int|float)->str|int|float:
         retorno = bool(dato)
 
     return retorno
-
-
-def rellenar_cadena(
-        mensaje:str, minimo_digitos:int=8, elemento_relleno:str="0"
-        )->str:
-    cadena = input(mensaje)
-    cantidad_a_rellenar = minimo_digitos - len(cadena)
-    relleno = ""
-    for _ in range(cantidad_a_rellenar):
-        relleno += elemento_relleno
-    return relleno + cadena
 
 
 #Descuentos sabiendo la cantidad de litros vendidos y el importe a pagar 
