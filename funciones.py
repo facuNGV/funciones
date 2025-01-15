@@ -162,18 +162,6 @@ def obtener_menor_y_mayor_en_lista(lista_numeros:list)->list:
     return [menor, mayor]
 
 
-def cortar_diccionario(diccionario:dict, desde:int, hasta:int)->dict:
-    """
-    Actúa como si los ítems de un diccionario fueran indexables y recorta el
-    diccionario dejando solo desde el ítem, hasta el ítem que se le indique
-    (no incluye al último).
-    Recibe: El diccionario y las posiciones en las que queremos cortar
-    Retorna: El diccionario recortado
-    """
-    slice_diccionario = dict(list(diccionario.items())[desde:hasta])
-    return slice_diccionario
-
-
 def comprobar_numero_dentro_de_rango(
         numero:int|float, minimo:int|float, maximo:int|float
         )->bool:
@@ -537,6 +525,22 @@ def calcular_fibonacci(numero:int)->int: #7
 def mostrar_serie_fibonacci(numero:int)->None:
     for i in range(0, numero + 1):
         print(f"{i}={calcular_fibonacci(i)}") 
+
+
+# Diccionarios
+def cortar_diccionario(diccionario:dict, desde:int, hasta:int)->dict:
+    """
+    Actúa como si los ítems de un diccionario fueran indexables y recorta el
+    diccionario dejando solo desde el ítem, hasta el ítem que se le indique
+    (no incluye al último).
+    Recibe: El diccionario y las posiciones en las que queremos cortar
+    Retorna: El diccionario recortado
+    """
+    slice_diccionario = dict(list(diccionario.items())[desde:hasta])
+    return slice_diccionario
+
+
+
 
 # Listas
 def append_casero(
