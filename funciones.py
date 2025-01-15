@@ -436,7 +436,7 @@ def reordenar_letras_de_una_palabra(palabra:str)->str:
 '''
 Matemáticas
 '''
-def determinar_multiplo(numero1:int, numero2:int)->bool:
+def determinar_multiplo(numero1:int|float, numero2:int|float)->bool:
     """
     Determina si un numero (1) es múltiplo de otro (2).
     Recibe: los dos numeros
@@ -449,10 +449,16 @@ def determinar_multiplo(numero1:int, numero2:int)->bool:
     return es_multiplo
 
 
-def tabla_del():
-    numero = int(input("Cual es la tabla del: "))
-    tabla = [numero * x for x in range(1, 10)]
-    return tabla
+def multiplicar_por_varios_numeros(numero:int|float, desde:int, hasta:int)->list:
+    """
+    Multiplica un número por un rango numérico indicado por parámetro,
+    y devuelve una lista con los resultados.
+    Recibe: número, un rango de números.
+    Retorna: una lista con los resultados de la multiplicacion del número con
+    cada uno de los números dentro del rango numérico indicado.
+    """
+    resultados = [numero * x for x in range(desde, hasta)]
+    return resultados
 
 
 #Calcular promedio de una lista de numeros
