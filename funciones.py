@@ -287,25 +287,16 @@ def castear_dato(dato:str|int|float)->str|int|float:
     return retorno
 
 
-#Descuentos sabiendo la cantidad de litros vendidos y el importe a pagar 
-def escala_descuentos(importe_total, litros_vendidos):
-    if litros_vendidos > 500:
-        importe_final = importe_total * 0.75
-    elif litros_vendidos >= 301:
-        importe_final = importe_total * 0.85
-    elif litros_vendidos >= 101:
-        importe_final = importe_total * 0.90
-    else:
-        importe_final = importe_total
-    return importe_final
-
-
-#Escala de precios segun el usuario combine, 
-# Opción de procesador, Opcion de memoria y si desea extender el Disco
-def compra_combinada(OP, OM, OD):
-    match OP:
+def compra_combinada(P, M, D):
+    """
+    Escala de precios según el usuario combine; Procesador, Memoria y si desea
+    extender el Disco.
+    Recibe: opciones seleccionadas por el usuario.
+    Retorna: El precio total a pagar 
+    """
+    match P:
         case 1:
-            match OM:
+            match M:
                 case 1:
                     p = 800
                 case 2:
@@ -313,7 +304,7 @@ def compra_combinada(OP, OM, OD):
                 case 3:
                     p = 1000
         case 2:
-            match OM:
+            match M:
                 case 1:
                     p = 900
                 case 2:
@@ -321,16 +312,15 @@ def compra_combinada(OP, OM, OD):
                 case 3:
                     p = 1400
         case 3:
-            match OM:
+            match M:
                 case 1:
                     p = 1200
                 case 2:
                     p = 1400
                 case 3:
                     p = 2000
-    if OD == 1:
+    if D == 1:
         p = p + 300
-    print (p)
     return p
 
 
