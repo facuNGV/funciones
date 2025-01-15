@@ -436,15 +436,16 @@ def reordenar_letras_de_una_palabra(palabra:str)->str:
 '''
 Matemáticas
 '''
-def es_multiplo():
-    es_multiplo = False
-    numero = int(input("Ingrese un numero: "))
-    mutiplo_de = int(input("Desea saber si es multiplo de: "))
-    if numero % mutiplo_de == 0:
+def determinar_multiplo(numero1:int, numero2:int)->bool:
+    """
+    Determina si un numero (1) es múltiplo de otro (2).
+    Recibe: los dos numeros
+    Retorna: True en caso que (1) sea múltiplo de (2), caso contrario; False.
+    """
+    if numero1 % numero2 == 0:
         es_multiplo = True
-        print("Es multiplo")
     else:
-        print("No es multiplo")
+        es_multiplo = False
     return es_multiplo
 
 
