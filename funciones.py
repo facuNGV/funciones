@@ -237,7 +237,7 @@ def obtener_menor_y_mayor_en_lista(lista_numeros:list)->list:
 def castear_dato(dato:str|int|float)->str|int|float:
     """
     Castea un dato determinado al tipo que le corresponda, si es un float con
-    coma decimal, lo transforma a punto decimal
+    coma decimal, lo transforma a punto decimal.
     Recibe: un dato
     Retorna: el mismo dato casteado a su tipo correspondiente
     """
@@ -261,18 +261,6 @@ def castear_dato(dato:str|int|float)->str|int|float:
         retorno = bool(dato)
 
     return retorno
-
-
-def medir_coleccion(coleccion:str|list|int|float)->int:
-    """
-    Esta función determina de cuantos caracteres esta compuesta una cadena
-    Recibe: una cadena cualquiera
-    Retorna: el numero de caracteres que compone la cadena
-    """
-    contador = 0
-    for _ in coleccion:
-        contador += 1
-    return contador
 
 
 def rellenar_cadena(
