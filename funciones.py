@@ -325,7 +325,12 @@ def compra_combinada(P, M, D):
 
 
 def dibujar_grafico_matplotlib(
-        x:list,y:list, marker, c, set_facecolor, set_xlabel, set_ylabel 
+        x:list,y:list,
+        marker: str = 'o',
+        c: str = 'blue',
+        set_facecolor: str = 'white',
+        set_xlabel: str = 'Eje X',
+        set_ylabel: str = 'Eje Y'
                     ):
     """
     Dibuja un grafico con matplotlib
