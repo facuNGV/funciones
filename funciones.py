@@ -325,17 +325,14 @@ def compra_combinada(P, M, D):
 
 
 def dibujar_grafico_matplotlib(
-        x:list,y:list,
-        marker: str = 'o',
-        c: str = 'blue',
-        set_facecolor: str = 'white',
-        set_xlabel: str = 'Eje X',
+        x:list,y:list, marker: str = 'o', c: str = 'blue',
+        set_facecolor: str = 'white', set_xlabel: str = 'Eje X',
         set_ylabel: str = 'Eje Y'
-                    ):
+                    )->None:
     """
     Dibuja un grafico con matplotlib
     Recibe: valores del eje y, valores del eje x
-    Retorna:
+    Retorna: None
     """
 
     fig = plt.figure()
@@ -357,6 +354,8 @@ def reordenar_letras_de_una_palabra(palabra:str)->str:
   Todos los dígitos pares ordenados de menor a mayor.
   La palabra OrDenar1234 debería formar la siguiente nueva palabra según el
   criterior anterior: --> aenrrDO1324
+  Recibe: una palabra
+  Retorna: la misma palabra reordenada
   """
   resultado = ""
   lista_objetivo = []
@@ -434,8 +433,9 @@ def reordenar_letras_de_una_palabra(palabra:str)->str:
 
 
 
-# Matemáticas
-
+'''
+Matemáticas
+'''
 def es_multiplo():
     es_multiplo = False
     numero = int(input("Ingrese un numero: "))
