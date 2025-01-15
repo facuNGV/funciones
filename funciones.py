@@ -236,7 +236,8 @@ def obtener_menor_y_mayor_en_lista(lista_numeros:list)->list:
 
 def castear_dato(dato:str|int|float)->str|int|float:
     """
-    Esta función castea un dato determinado al tipo que le corresponda
+    Castea un dato determinado al tipo que le corresponda, si es un float con
+    coma decimal, lo transforma a punto decimal
     Recibe: un dato
     Retorna: el mismo dato casteado a su tipo correspondiente
     """
