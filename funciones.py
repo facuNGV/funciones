@@ -119,58 +119,19 @@ def solicitar_elementos_para_lista( usuario_define_cantidad_elementos:bool,
     return lista
 
 
-'''
-Situacionales
-'''
-def descuento_condicionado(importe_venta, montos_descuentos:dict):
-    """
-    A partir de un diccionario(clave=tupla, valor=numero) y un importe, segun
-    en que rango(clave) se encuentre el importe, aplicará el descuento(valor) 
-    correspondiente.
-    Recibe: el importe de la venta, el diccionario con los rangos vinculados
-    a los descuentos.
-    Retorna: el importe final a pagar con el descuento aplicado 
-    """
-    importe_final = importe_venta
-    for clave, valor in montos_descuentos.items():
-        if importe_venta > clave[0] and importe_venta < clave[1]:
-            importe_final = importe_venta - (importe_venta * valor)
-    return importe_final
 
 
-def obtener_menor_y_mayor_en_lista(lista_numeros:list)->list:
-    """
-    Encuentra el número más chico y el número más grande dentro de una lista
-    de números.
-    Recibe: la lista de números
-    Retorna: una lista con el número más pequeño y más grande respectivamente.
-    """
-    if lista_numeros[0] > lista_numeros[1]:
-        mayor = lista_numeros[0]
-        menor = lista_numeros[1]
-    elif lista_numeros[0] < lista_numeros[1]:
-        menor = lista_numeros[0]
-        mayor = lista_numeros[1]
-    elif lista_numeros [0] == lista_numeros[1]:
-        mayor = lista_numeros[0]
-        menor = lista_numeros [1]
-    for x in lista_numeros:      
-        if x > mayor:
-            mayor = x
-        elif x < menor:
-            menor = x
-    return [menor, mayor]
-
-
+"""
+Validaciones
+"""
 def comprobar_numero_dentro_de_rango(
         numero:int|float, minimo:int|float, maximo:int|float
         )->bool:
     """
-    Esta función valida si un determinado numero se encuentra dentro de un 
-    rango determinado (inclusive)
-    Recibe: Un numero, un determinado rango numérico
-    Retorna: True en caso de que el numero se encuentre dentro del rango
-    False caso contrario o None caso de que no se haya ingresado un numero
+    Valida si un determinado número se encuentra dentro de un rango (inclusive)
+    Recibe: Un número, un determinado rango numérico
+    Retorna: True en caso de que el número se encuentre dentro del rango, caso
+    contrario False o None caso de que no se haya ingresado un número
     """
     retorno = None
     if determinar_numero(numero) != False:
@@ -225,6 +186,51 @@ def determinar_numero(dato:str)->bool|str:
         elif tiene_digitos == True and tiene_coma == False:
             retorno = "int"
         return retorno
+
+
+
+
+'''
+Situacionales
+'''
+def descuento_condicionado(importe_venta, montos_descuentos:dict):
+    """
+    A partir de un diccionario(clave=tupla, valor=numero) y un importe, segun
+    en que rango(clave) se encuentre el importe, aplicará el descuento(valor) 
+    correspondiente.
+    Recibe: el importe de la venta, el diccionario con los rangos vinculados
+    a los descuentos.
+    Retorna: el importe final a pagar con el descuento aplicado 
+    """
+    importe_final = importe_venta
+    for clave, valor in montos_descuentos.items():
+        if importe_venta > clave[0] and importe_venta < clave[1]:
+            importe_final = importe_venta - (importe_venta * valor)
+    return importe_final
+
+
+def obtener_menor_y_mayor_en_lista(lista_numeros:list)->list:
+    """
+    Encuentra el número más chico y el número más grande dentro de una lista
+    de números.
+    Recibe: la lista de números
+    Retorna: una lista con el número más pequeño y más grande respectivamente.
+    """
+    if lista_numeros[0] > lista_numeros[1]:
+        mayor = lista_numeros[0]
+        menor = lista_numeros[1]
+    elif lista_numeros[0] < lista_numeros[1]:
+        menor = lista_numeros[0]
+        mayor = lista_numeros[1]
+    elif lista_numeros [0] == lista_numeros[1]:
+        mayor = lista_numeros[0]
+        menor = lista_numeros [1]
+    for x in lista_numeros:      
+        if x > mayor:
+            mayor = x
+        elif x < menor:
+            menor = x
+    return [menor, mayor]
 
 
 def castear_dato(dato:str|int|float)->str|int|float:
