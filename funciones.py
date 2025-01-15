@@ -144,48 +144,49 @@ def comprobar_numero_dentro_de_rango(
 
 
 def determinar_numero(dato:str)->bool|str:
-        '''
-        Esta función determina si el dato ingresado es un número y su tipo.
-        Permite la coma o el punto para decimales indistintamente (cuidado en los flaots).
-        Recibe: un str cualquiera
-        Retorna: el tipo de dato en caso de que sea un número, caso contrario
-        devuelve False
-        '''
+    '''
+    Determina si el dato ingresado es un número y su tipo.
+    Permite la coma o el punto para decimales indistintamente (cuidado en 
+    los floats).
+    Recibe: un string cualquiera
+    Retorna: el tipo de dato en caso de que sea un número, caso contrario
+    devuelve False
+    '''
+    retorno = True
+    # Verificar que no sea un string vacio
+    if not dato:
         retorno = False
-        # Verificar si se ingreso algo o no se ingreso nada
-        if not dato:
-            return False
-        # Variables para controlar mas adelante si tiene coma y digitos
-        tiene_coma = False
-        tiene_digitos = False
-        # Contador de Iteraciónes
-        pos = 0
-        # Recorrer cada carácter en la cadena
-        dato = str(dato)
-        for char in dato:
-            if char == '-':
-                # Si el signo negativo no está primero no es un número
-                if pos != 0:
-                    return False
-            elif char == ',' or char == ".":
-                # La coma no puede estar al principio, ni al final, no pueden
-                # haber dos y el caracter anterior no puede ser "-"
-                if pos == 0 or pos == (len(dato)-1) or tiene_coma == True or caracter_anterior == "-":
-                    return False
-                tiene_coma = True
-            # Todos los demás caracteres deben ser dígitos.
-            elif ord(char) >= 48 and ord(char)<= 57:
-                tiene_digitos = True
-            else:
-                return False
-            pos += 1
-            caracter_anterior = char
-        # Determinar que tipo es
-        if tiene_digitos == True and tiene_coma == True:
-            retorno = "float"
-        elif tiene_digitos == True and tiene_coma == False:
-            retorno = "int"
-        return retorno
+    # Variables para controlar mas adelante si tiene coma y dígitos
+    tiene_coma = False
+    tiene_digitos = False
+    # Contador de Iteraciones
+    pos = 0
+    # Recorrer cada carácter en la cadena
+    dato = str(dato)
+    for char in dato:
+        if char == '-':
+            # Si el signo negativo no está primero no es un número
+            if pos != 0:
+                retorno = False
+        elif char == ',' or char == ".":
+            # La coma no puede estar al principio, ni al final, no pueden
+            # haber dos y el caracter anterior no puede ser "-"
+            if pos == 0 or pos == (len(dato)-1) or tiene_coma == True or caracter_anterior == "-":
+                retorno = False
+            tiene_coma = True
+        # Todos los demás caracteres deben ser dígitos.
+        elif ord(char) >= 48 and ord(char)<= 57:
+            tiene_digitos = True
+        else:
+            retorno = False
+        pos += 1
+        caracter_anterior = char
+    # Determinar que tipo es y que el retorno no haya entrado en ningun False
+    if tiene_digitos == True and tiene_coma == True and retorno == True:
+        retorno = "float"
+    elif tiene_digitos == True and tiene_coma == False and retorno == True:
+        retorno = "int"
+    return retorno
 
 
 
