@@ -495,12 +495,14 @@ def convertir_a_porcentaje(cantidades:dict)->dict:
     diccionario_transformado["porcentaje total"] = porcentaje_total
     return diccionario_transformado
 
+
 def determinar_primo(numero:int)->bool:
     """
-    Esta función determina si un número es primo o no
-    Recibe: un numero 
-    Retorna: True en caso de ser primo, caso contrario False
+    Determina si un número es primo o no.
+    Recibe: un numero.
+    Retorna: True en caso de ser primo, caso contrario False.
     """
+    retorno = None
     contador_divisores = 0
     contador_resto_0 = 0
     while contador_divisores < numero:
@@ -508,12 +510,18 @@ def determinar_primo(numero:int)->bool:
         if numero % contador_divisores == 0:
             contador_resto_0 += 1
     if contador_resto_0 == 2:
-        return True
+        retorno = True
     else:
-        return False
+        retorno = False
+    return retorno
     
 
-def determinar_primo2(numero):
+def determinar_primo2(numero:int):
+    """
+    Determina si un número es primo o no.
+    Recibe: un numero.
+    Retorna: True en caso de ser primo, caso contrario False.
+    """
     acu = 0
     for x in range(1, numero+1):
         if (numero % x) == 0:
