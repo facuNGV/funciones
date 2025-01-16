@@ -474,13 +474,26 @@ def calcular_promedio(numeros:list)->int|float:
     return promedio
 
 
-#Calcular porcentajes
-def porcentajem2(m2totales, m2cubiertos):
-    m2descubiertos = m2totales - m2cubiertos
-    pm2cubiertos = (m2cubiertos * 100) / m2totales
-    pm2descubiertos = (m2descubiertos * 100) / m2totales
-    return pm2cubiertos, pm2descubiertos
-
+def convertir_a_porcentaje(cantidades:dict)->dict:
+    """
+    Recibe unas cantidades (un total de algo y porciones de el total), transforma
+    las partes a su equivalente en porcentaje. Tambien crea una nueva clave-valor
+    con la suma de todos los porcentajes.
+    Recibe: las cantidades (total y porciones)
+    Retorna: las mismas transformadas a porcentajes, y la suma de los
+    porcentajes en una nueva clave-valor.
+    """
+    diccionario_transformado = {}
+    porcentaje_total = 0
+    for total_o_porcion, cantidad in cantidades.items():
+        if total_o_porcion == "total":
+            diccionario_transformado[total_o_porcion] = cantidad
+        else:
+            cantidad_en_porcentaje = (cantidad * 100)/cantidades["total"]
+            diccionario_transformado[total_o_porcion] = cantidad_en_porcentaje
+            porcentaje_total += cantidad_en_porcentaje
+    diccionario_transformado["porcentaje total"] = porcentaje_total
+    return diccionario_transformado
 
 def determinar_primo(numero:int)->bool:
     """
@@ -496,7 +509,7 @@ def determinar_primo(numero:int)->bool:
             contador_resto_0 += 1
     if contador_resto_0 == 2:
         return True
-    else: 
+    else:
         return False
     
 
