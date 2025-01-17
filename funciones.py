@@ -534,10 +534,9 @@ def detectar_primo_con_for(numero:int)->bool:
     return retorno
     
 
-
 def calcular_factorial(numero:int)->int:
     """
-    Esta funcion calculara el factorial de un numero 
+    Calculara el factorial de un número. 
     Recibe: Un número entero
     Retorna: El factorial de dicho número
     """
@@ -547,15 +546,25 @@ def calcular_factorial(numero:int)->int:
     return acumulador
 
 
-def calcular_factorial(numero:int)->int:
+def calcular_factorial_recursividad(numero:int)->int:
+    """
+    Calculara el factorial de un número. 
+    Recibe: Un número entero
+    Retorna: El factorial de dicho número
+    """
     if numero == 0:
         resultado = 1
     else:
-        resultado = numero * calcular_factorial(numero - 1)
+        resultado = numero * calcular_factorial_recursividad(numero - 1)
         return resultado
 
 
-def calcular_fibonacci(numero:int)->int: #7
+def calcular_fibonacci(numero:int)->int:
+    """
+    Calculara cual sería el equivalente de un número en la sucesión de fibonacci
+    Recibe: Un número entero
+    Retorna: su equivalente en la sucesión de fibonacci.
+    """
     if numero < 2:
         resultado = numero
     else:
@@ -564,11 +573,21 @@ def calcular_fibonacci(numero:int)->int: #7
 
 
 def mostrar_serie_fibonacci(numero:int)->None:
+    """
+    Calcula y muestra la sucesión de fibonacci hasta la cantidad que se pase por
+    parámetro.
+    Recibe: Un número entero
+    Retorna: None.
+    """
     for i in range(0, numero + 1):
         print(f"{i}={calcular_fibonacci(i)}") 
 
 
-# Diccionarios
+
+
+"""
+Diccionarios
+"""
 def cortar_diccionario(diccionario:dict, desde:int, hasta:int)->dict:
     """
     Actúa como si los ítems de un diccionario fueran indexables y recorta el
@@ -583,49 +602,30 @@ def cortar_diccionario(diccionario:dict, desde:int, hasta:int)->dict:
 
 
 
-# Listas
-def append_casero(
-        append_casero_lista:list, elemento:str|int|float|bool|list=None,
-        mensaje:str=None
-        )->None:
+"""
+Listas
+"""
+def solicitar_y_subir_elementos_en_indice(lista:list, mensaje_indice:str, mensaje_para_pedir_elemento:str)->None:
     """
-    Un elemento solicitado al usuario o pasado por parámetro se añade a una lista
-    Recibe: O bien... el elemento por parámetro o bien... el mensaje para 
-    solicitar el elemento al usuario. Y la lista que se desea modificar.
-    Retorna: None
+    Pide al usuario el elemento y su posición en la lista y los agrega a la 
+    lista pasada por parámetro. No inserta, por lo que si ya hay un elemento
+    en la posición lo reemplazará.
+    Pedirá datos hasta que el usuario lo quiera.
+    Recibe: La lista a modificar, los mensajes para solicitar los datos al
+    usuario.
+    Retorna: None. 
     """
-    if mensaje != None:
-        elemento = input(mensaje)
-        elemento = castear_dato(elemento)
-    append_casero_lista += [elemento]
-
-
-def solicitar_subir_elementos_en_indice(lista:list)->None:
-    """
-    Esta función pide al usuario índices y elementos determinados y los sube a una lista pasada
-    por parámetro. No inserta, por lo que si ya hay un elemento en la posición lo reemplazará.
-    Pedirá datos hasta que el usuario lo quiera
-    Recibe: La lista a modificar, los mensajes para solicitar los datos al usuario
-    Retorna: None 
-    """
-    mensaje_indice = "¿En que posición desea agregar el elemento?: "
-    mensaje_elemento = "Ingrese el elemento a añadir: "
     while True:
         indice_ingresado = solicitar_y_validar_numero_en_rango(mensaje_indice, 0, (len(lista)-1))
-        
-        elemento_ingresado = input(mensaje_elemento)
-        if determinar_numero(elemento_ingresado) == "int":
-            elemento_ingresado = int(elemento_ingresado)
-        elif determinar_numero(elemento_ingresado) == "float":
-            elemento_ingresado = float(elemento_ingresado)
- 
+        elemento_ingresado = input(mensaje_para_pedir_elemento)
+        elemento_ingresado = castear_dato(elemento_ingresado)
         lista[indice_ingresado] = elemento_ingresado
-
-        respuesta = input("Desea seguir ingresando datos? S/N: ")        
-        if respuesta == "N":
+        respuesta = input("Desea seguir ingresando datos? [Y/N]: ")        
+        respuesta_min = respuesta.lower()
+        if respuesta_min == "n":
             break
 
-# here
+
 def buscar_elemento_en_lista(lista:list, dato:int)->list|None:
     coincidencias = []
     for i in range(len(lista)):
