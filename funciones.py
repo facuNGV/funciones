@@ -605,49 +605,21 @@ def cortar_diccionario(diccionario:dict, desde:int, hasta:int)->dict:
 """
 Listas
 """
-def solicitar_y_subir_elementos_en_indice(lista:list, mensaje_indice:str, mensaje_para_pedir_elemento:str)->None:
+def hallar_indice_en_lista(lista:list, elemento:int)->list|None:
     """
-    Pide al usuario el elemento y su posición en la lista y los agrega a la 
-    lista pasada por parámetro. No inserta, por lo que si ya hay un elemento
-    en la posición lo reemplazará.
-    Pedirá datos hasta que el usuario lo quiera.
-    Recibe: La lista a modificar, los mensajes para solicitar los datos al
-    usuario.
-    Retorna: None. 
+    Halla índice/s de elemento en lista. Crea una lista de índices según en que
+    posicion o posiciones se encuentre el elemento.
+    Recibe: la lista, el elemento del que obtener el índice.
+    Retorna: una lista con los índices coincidentes. None en caso de no encontrar
+    ninguno.
     """
-    while True:
-        indice_ingresado = solicitar_y_validar_numero_en_rango(mensaje_indice, 0, (len(lista)-1))
-        elemento_ingresado = input(mensaje_para_pedir_elemento)
-        elemento_ingresado = castear_dato(elemento_ingresado)
-        lista[indice_ingresado] = elemento_ingresado
-        respuesta = input("Desea seguir ingresando datos? [Y/N]: ")        
-        respuesta_min = respuesta.lower()
-        if respuesta_min == "n":
-            break
-
-
-def buscar_elemento_en_lista(lista:list, dato:int)->list|None:
     coincidencias = []
     for i in range(len(lista)):
-        if dato == lista[i]:
+        if elemento == lista[i]:
             coincidencias += [i]
     if len(coincidencias) == 0:
         coincidencias = None
     return coincidencias
-
-#le agregaria una validacion que me valide si son numeros lo que ingresa el usuario
-def pedir_elementos_para_lista(cantidad:int, mensaje:str, tipo:str)->list:
-    """
-    """
-    lista = []
-    for _ in range(cantidad):
-        dato = input(mensaje)
-        if tipo == "int":
-            dato = int(dato)
-        elif tipo == "float":
-            dato = float(dato)
-        lista += [dato]
-    return lista
 
 
 def cargar_lista(cantidad:int, mensaje:str, tipo:str)->list:
