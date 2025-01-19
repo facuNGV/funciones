@@ -607,8 +607,7 @@ Listas
 """
 def hallar_indice_en_lista(lista:list, elemento:int)->list|None:
     """
-    Halla índice/s de elemento en lista. Crea una lista de índices según en que
-    posicion o posiciones se encuentre el elemento.
+    Halla índice/s de un elemento en una lista y crea otra lista con ellos.
     Recibe: la lista, el elemento del que obtener el índice.
     Retorna: una lista con los índices coincidentes. None en caso de no encontrar
     ninguno.
