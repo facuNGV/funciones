@@ -605,7 +605,7 @@ def cortar_diccionario(diccionario:dict, desde:int, hasta:int)->dict:
 """
 Listas
 """
-def hallar_indice_en_lista(lista:list, elemento:int)->list|None:
+def hallar_indice_en_lista(lista:list, elemento:any)->list|None:
     """
     Halla índice/s de un elemento en una lista y crea otra lista con ellos.
     Recibe: la lista, el elemento del que obtener el índice.
@@ -621,24 +621,13 @@ def hallar_indice_en_lista(lista:list, elemento:int)->list|None:
     return coincidencias
 
 
-def cargar_lista(cantidad:int, mensaje:str, tipo:str)->list:
-    """
-    """
-    lista = []
-    for _ in range(cantidad):
-        dato = input(mensaje)
-        if tipo == "int":
-            dato = int(dato)
-        elif tipo == "float":
-            dato = float(dato)
-        lista += [dato]
-    return lista
-
-
-def generar_lista_aleatoria_numeros(
+def generar_lista_numeros_aleatorios(
         cantidad_numeros:int, minimo:int, maximo:int
         )->list:
     """
+    Genera una lista aleatoria de números.
+    Recibe: cantidad de números a generar, rango numérico para cada número.
+    Retorna: la lista generada.
     """
     lista_numeros = []
     for _ in range(cantidad_numeros):
@@ -646,10 +635,32 @@ def generar_lista_aleatoria_numeros(
     return lista_numeros
 
 
-def generar_lista_aleatoria_letras_mayusculas(
+def generar_lista_ASCII(
+        primer_caracter:int, ultimo_caracter:int
+        )->list:
+    """
+    Genera una lista, cuyos elementos serán números dentro de un rango indicado
+    transformados a sus equivalentes en carácteres ASCII.
+    Recibe: rango numérico.
+    Returns: lista con los números transformados en ASCII.
+    """
+    lista_caracteres = []
+    for numero in range(primer_caracter, ultimo_caracter+1):
+        caracter = chr(numero)
+        lista_caracteres += [caracter]
+    return lista_caracteres
+
+
+def generar_lista_ASCII_aleatorios(
         cantidad_elementos:int, minimo:int, maximo:int
         )->list:
     """
+    Genera una lista con una cantidad de elementos indicada, cada elemento será
+    un número aleatorio dentro de un rango indicado que fue transformado a su 
+    equivalente en caracter ASCII.
+    Recibe: cantidad de elementos, rango numérico entre el cual se generaran los
+    numeros aleatorios que se convertiran en su equivalente ASCII.
+    Returns: lista con los numeros transformados en ASCII.
     """
     lista_letras_aleatorias = []
     for _ in range(cantidad_elementos):
@@ -657,6 +668,24 @@ def generar_lista_aleatoria_letras_mayusculas(
         letra = chr(numero_aleatorio)
         lista_letras_aleatorias += [letra]
     return lista_letras_aleatorias
+
+
+def convertir_lista_ASCII(numeros:list[int])->list:
+    """
+    Convierte los numeros de una lista a ASCII.
+    Recibe: lista de enteros.
+    Returns: misma lista con elementos transformados a su equivalente en ASCII.
+    """
+    lista_elementos_transformados = []
+    retorno = None
+    for numero in numeros:
+        if determinar_numero(numero) == False:
+            retorno = "La lista solo debe contener enteros"
+            break
+        numero_en_ascii = chr(numero)
+        lista_elementos_transformados += [numero_en_ascii]
+    retorno = lista_elementos_transformados
+    return retorno
 
 
 def mostrar_lista(lista:list, mensaje:str="")->None:
