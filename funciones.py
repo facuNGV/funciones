@@ -690,10 +690,14 @@ def convertir_lista_ASCII(numeros:list[int])->list:
 
 def mostrar_lista(lista:list, mensaje:str="")->None:
     """
+    Imprime ordenadamente una lista por consola.
+    Recibe: una lista, un mensaje opcional.
+    Returns: None.
     """
     if mensaje != "":
         print(mensaje)
     for elemento in lista:
+        # No se agrega coma al final del último elemento.
         if elemento == lista[-1]:
             print(elemento)
         else:
@@ -701,6 +705,12 @@ def mostrar_lista(lista:list, mensaje:str="")->None:
 
 
 def ordenar_lista(lista:list, criterio:str="ASC")->bool:
+    """
+    Ordena ascendiente o descendientemente una lista basandose en ASCII.
+    Recibe: una lista, y un criterio para ordenar asecendientemente (ASC) o
+    descendientemente (DESC).
+    Returns: True en caso de haber ordenado la lista, caso contrario; False.
+    """
     bandera = False
     for i in range(len(lista)-1):
         for j in range(i+1, len(lista)):
@@ -713,7 +723,15 @@ def ordenar_lista(lista:list, criterio:str="ASC")->bool:
 
 
 def swapear(lista:list, indice_a=int, indice_b=int)->bool:
+        """
+        Toma dos elementos de una lista e intercambia posición (uno asume
+        posición del otro).
+        Recibe: una lista, dos índices.
+        Returns: True en caso swappeo realizado correctamente, caso contrario
+        False.
+        """
         retorno = False
+        # Verifica más de un elemento, y que los índices estén dentro del largo de la lista.
         if len(lista) > 1 and indice_a < len(lista) and indice_b < len(lista):
             aux = lista[indice_a]
             lista[indice_a] = lista[indice_b]
