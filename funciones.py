@@ -739,34 +739,35 @@ def swapear(lista:list, indice_a=int, indice_b=int)->bool:
             retorno = True
         return retorno
 
-# Matrices
+
+"""
+Matrices
+"""
 def crear_matriz(
         cantidad_filas:int, cantidad_columnas:int, valor_inicial:any=0
         )->list:
     """
-    Esta función se encarga de crear una matriz vacía
-        Recibe:
-            cantidad_filas (int): representa las filas que va a tener la matriz
-            cantidad_columans (int): representa las columnas que va a tener la matriz
-
-        Devuelve:
-            matriz (list): la matriz creada a través de los parámetros
+    Crea una matriz.
+    Recibe: cantidad de filas, cantidad de columnas, valor inicial de cada
+    elemento.
+    Returns: La matriz.
     """
     matriz = []
     for _ in range(cantidad_filas):
         fila = [valor_inicial] * cantidad_columnas
         matriz += [fila]
-
     return matriz
 
 
-def cargar_matriz_secuencialmente(matriz:list):
-    # Le pido al usuario los datos de la matriz
-    # como es secuencial debo controlar que 
-    # ingrese todos los datos
+def cargar_matriz_secuencialmente(matriz:list)->None:
+    """
+    Solicita por consola elementos para rellenar la matriz, secuencialmente.
+    Recibe: una matriz.
+    Returns: None.
+    """
     for i in range(len(matriz)):
         for j in range(len(matriz[i])):
-            matriz[i][j] = int(input(f"Fila {i} columna {j}"))
+            matriz[i][j] = castear_dato(input(f"Fila {i} columna {j}: "))
 
 
 def verificar_numero_repetido_en_matriz(matriz:list, numero:int)->bool:
