@@ -770,13 +770,17 @@ def cargar_matriz_secuencialmente(matriz:list)->None:
             matriz[i][j] = castear_dato(input(f"Fila {i} columna {j}: "))
 
 
-def verificar_numero_repetido_en_matriz(matriz:list, numero:int)->bool:
+def verificar_numero_repetido_en_matriz(matriz:list, elemento:any)->bool:
     """
+    Comprueba que un elemento se encuentre (o no) en una matriz.
+    Recibe: una matriz, un elemento.
+    Returns: True en caso de que el elemento se encuentre en la matriz, caso
+    contrario False.
     """
     bandera_numero_repetido = False
     for i in range(len(matriz)):
         for j in range(len(matriz[i])):
-            if matriz[i][j] == numero:
+            if matriz[i][j] == elemento:
                 bandera_numero_repetido = True
                 break
         if bandera_numero_repetido == True:
