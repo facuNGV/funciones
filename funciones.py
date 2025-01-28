@@ -642,7 +642,7 @@ def generar_lista_ASCII(
     Genera una lista, cuyos elementos serán números dentro de un rango indicado
     transformados a sus equivalentes en carácteres ASCII.
     Recibe: rango numérico.
-    Returns: lista con los números transformados en ASCII.
+    Retorna: lista con los números transformados en ASCII.
     """
     lista_caracteres = []
     for numero in range(primer_caracter, ultimo_caracter+1):
@@ -660,7 +660,7 @@ def generar_lista_ASCII_aleatorios(
     equivalente en caracter ASCII.
     Recibe: cantidad de elementos, rango numérico entre el cual se generaran los
     numeros aleatorios que se convertiran en su equivalente ASCII.
-    Returns: lista con los numeros transformados en ASCII.
+    Retorna: lista con los numeros transformados en ASCII.
     """
     lista_letras_aleatorias = []
     for _ in range(cantidad_elementos):
@@ -674,7 +674,7 @@ def convertir_lista_ASCII(numeros:list[int])->list:
     """
     Convierte los numeros de una lista a ASCII.
     Recibe: lista de enteros.
-    Returns: misma lista con elementos transformados a su equivalente en ASCII.
+    Retorna: misma lista con elementos transformados a su equivalente en ASCII.
     """
     lista_elementos_transformados = []
     retorno = None
@@ -692,7 +692,7 @@ def mostrar_lista(lista:list, mensaje:str="")->None:
     """
     Imprime ordenadamente una lista por consola.
     Recibe: una lista, un mensaje opcional.
-    Returns: None.
+    Retorna: None.
     """
     if mensaje != "":
         print(mensaje)
@@ -709,7 +709,7 @@ def ordenar_lista(lista:list, criterio:str="ASC")->bool:
     Ordena ascendiente o descendientemente una lista basandose en ASCII.
     Recibe: una lista, y un criterio para ordenar asecendientemente (ASC) o
     descendientemente (DESC).
-    Returns: True en caso de haber ordenado la lista, caso contrario; False.
+    Retorna: True en caso de haber ordenado la lista, caso contrario; False.
     """
     bandera = False
     for i in range(len(lista)-1):
@@ -727,7 +727,7 @@ def swapear(lista:list, indice_a=int, indice_b=int)->bool:
         Toma dos elementos de una lista e intercambia posición (uno asume
         posición del otro).
         Recibe: una lista, dos índices.
-        Returns: True en caso swappeo realizado correctamente, caso contrario
+        Retorna: True en caso swappeo realizado correctamente, caso contrario
         False.
         """
         retorno = False
@@ -750,7 +750,7 @@ def crear_matriz(
     Crea una matriz.
     Recibe: cantidad de filas, cantidad de columnas, valor inicial de cada
     elemento.
-    Returns: La matriz.
+    Retorna: La matriz.
     """
     matriz = []
     for _ in range(cantidad_filas):
@@ -763,18 +763,18 @@ def cargar_matriz_secuencialmente(matriz:list)->None:
     """
     Solicita por consola elementos para rellenar la matriz, secuencialmente.
     Recibe: una matriz.
-    Returns: None.
+    Retorna: None.
     """
     for i in range(len(matriz)):
         for j in range(len(matriz[i])):
             matriz[i][j] = castear_dato(input(f"Fila {i} columna {j}: "))
 
 
-def verificar_numero_repetido_en_matriz(matriz:list, elemento:any)->bool:
+def buscar_elemento_en_matriz(matriz:list, elemento:any)->bool:
     """
     Comprueba que un elemento se encuentre (o no) en una matriz.
     Recibe: una matriz, un elemento.
-    Returns: True en caso de que el elemento se encuentre en la matriz, caso
+    Retorna: True en caso de que el elemento se encuentre en la matriz, caso
     contrario False.
     """
     bandera_numero_repetido = False
@@ -788,27 +788,39 @@ def verificar_numero_repetido_en_matriz(matriz:list, elemento:any)->bool:
     return bandera_numero_repetido
 
 
-def cargar_matriz_elementos_aleatorios_rango_1_9(
+def cargar_matriz_numeros_aleatorios_rango_1_9(
         matriz:list, minimo:int = 1, maximo:int = 9
         )->None:
     """
+    Carga una matriz con números. Cada número será aleatorio e irrepetible dentro
+    de la matriz, y estará dentro de un rango numérico indicado por parámetro. 
+    Recibe: una matriz, un rango numérico.
+    Retorna: None.
     """
     for i in range(len(matriz)):
         for j in range(len(matriz[i])):
             numero_random = random.randint(minimo, maximo)
-            while verificar_numero_repetido_en_matriz(matriz, numero_random) == True:
+            while buscar_elemento_en_matriz(matriz, numero_random) == True:
                 numero_random = random.randint(minimo, maximo)
             matriz[i][j] = numero_random
 
 
 def llenar_matriz_aleatoriamente(matriz_vacia:list, desde:int=0, hasta:int=9)->None:
+    """
+    Carga una matriz con números aleatorios dentro de un rango indicado.
+    Recibe: una matriz, un rango numérico.
+    Retorna: None.
+    """
     for i in range(len(matriz_vacia)):
         for j in range(len(matriz_vacia[i])):
-            matriz_vacia[i][j] = str(random.randint(desde,hasta))
+            matriz_vacia[i][j] = random.randint(desde,hasta)
 
 
 def mostrar_matriz(matriz:list)->None:
     """
+    Visualizacion más gráfica de la matriz en la consola.
+    Recibe: una matriz
+    Retorna: None.
     """
         # [ [ 4, 3, 5, 7 ], [ 5, 6, 8, 7 ], [ 5, 6, 1, 6 ], [ 5, 9, 3, 5 ], [ 2, 1, 2, 6 ] ]
 
@@ -819,8 +831,8 @@ def mostrar_matriz(matriz:list)->None:
             if j < (len(matriz[i])-1):
                 print(f"{matriz[i][j]}", end="|")
             else:
-                print(f"{matriz[i][j]}", end="")
-        print()
+                print(f"{matriz[i][j]}")
+
         #        [ 5 ]    - 1 = 4
         if i < (len(matriz)-1):
             print (("-" * len(matriz[i]))*2)
