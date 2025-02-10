@@ -823,7 +823,6 @@ def mostrar_matriz(matriz:list)->None:
     Retorna: None.
     """
         # [ [ 4, 3, 5, 7 ], [ 5, 6, 8, 7 ], [ 5, 6, 1, 6 ], [ 5, 9, 3, 5 ], [ 2, 1, 2, 6 ] ]
-
         #        [ 0, 1, 2, 3, 4 ]
     for i in range(len(matriz)):
         #               [ 0, 1, 2, 3 ]
@@ -832,20 +831,22 @@ def mostrar_matriz(matriz:list)->None:
                 print(f"{matriz[i][j]}", end="|")
             else:
                 print(f"{matriz[i][j]}")
-
         #        [ 5 ]    - 1 = 4
         if i < (len(matriz)-1):
+            # Un guión por columna y un guión por pipe (*2)
             print (("-" * len(matriz[i]))*2)
 
 
 """
 Archivos
 """
-def contar_dato_csv(ruta_archivo:str, clave_o_columna):
+def acumular_datos_de_columna_csv(ruta_archivo:str, clave_o_columna):
     """
-    Suma las filas de un csv en una columna cuyos datos sean numéricos y obtiene
-    el total de esa columna en todas las filas.
-    Recibe: ruta del csv, 
+    Suma los valores numéricos de la columna de un csv y obtiene el total
+    de esa columna en todas las filas.
+    Recibe: ruta del csv, la columna (clave en python) de los valores que van
+    a sumarse
+    Retorna: El acumulado total
     """
     with open(ruta_archivo) as csvfile:
         data = list(csv.DictReader(csvfile))
@@ -856,34 +857,23 @@ def contar_dato_csv(ruta_archivo:str, clave_o_columna):
     return total_acumulado
 
 
-def contar_ambientes_csv(ambientes, archivo):
+def contar_ocurrencias_csv(path_archivo:str, columna:str)->dict:
     """
-    Esta funcion abre un csv y segun el tipo de ambiente seleccionado por parametro
-    determina cuantos hay en el archivo
-    Recibe: tipo de ambiente, ruta del csv
-    Retorna: cantidad de departamentos con ese tipo de ambiente
+    Arma un diccionario vinculando cada tipo de dato que hay en una columna
+    determinada de un csv con la cantidad de filas en las que aparece.
+    Recibe: la ruta del csv, la columna a analizar.
+    Retorna: Un diccionario donde las claves son los valores únicos de la columna
+    y los valores son la cantidad de veces que aparecen en el CSV.
     """
-
-    with open(archivo) as csvfile:
+    diccionario_retorno = {}
+    with open(path_archivo) as csvfile:
         data= list(csv.DictReader(csvfile))
-    cantidad_2ambientes = 0
-    cantidad_3ambientes = 0
-    retorno = None
-    for fila in data:
-        try:
-            tipo_ambiente = int(fila.get("ambientes", 0.0))
-        except:
-            tipo_ambiente = 0
-        if tipo_ambiente == 2:
-            cantidad_2ambientes += 1
-        elif tipo_ambiente == 3:
-            cantidad_3ambientes += 1
-    print(cantidad_2ambientes, cantidad_3ambientes)
-    if ambientes == "2_ambientes":
-        retorno = cantidad_2ambientes        
-    elif ambientes == "3_ambientes":
-        retorno = cantidad_3ambientes
-    return retorno
+    for i in range(len(data)):
+        tipo_actual = data[i][columna]
+        if tipo_actual not in diccionario_retorno:
+            diccionario_retorno[tipo_actual] = 0
+        diccionario_retorno[tipo_actual] += 1
+    return diccionario_retorno
 
 
 #Funciones de Extraccion de un JSON y creación de un dict a partir de este
