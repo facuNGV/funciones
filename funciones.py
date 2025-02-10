@@ -876,8 +876,12 @@ def contar_ocurrencias_csv(path_archivo:str, columna:str)->dict:
     return diccionario_retorno
 
 
-#Funciones de Extraccion de un JSON y creación de un dict a partir de este
-def extraer(url):
+def convertir_json_a_dict(url:str)->dict:
+    """
+    Extrae un json de la nube a partir del link y lo convierte a diccionario
+    Recibe: La url del json.
+    Retorna: Los datos del json convertidos a diccionario.
+    """
     response = requests.get(url= url)
     if response.ok:
         data = response.json()
