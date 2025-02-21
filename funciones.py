@@ -514,7 +514,7 @@ def detectar_primo_con_while(numero:int)->bool:
     else:
         retorno = False
     return retorno
-    
+
 
 def detectar_primo_con_for(numero:int)->bool:
     """
@@ -532,7 +532,7 @@ def detectar_primo_con_for(numero:int)->bool:
     else:
         retorno = False
     return retorno
-    
+
 
 def calcular_factorial(numero:int)->int:
     """
@@ -888,14 +888,19 @@ def convertir_json_a_dict(url:str)->dict:
         return data
 
 
-#Analiza un json correspondiente a un registro de estudiantes
-def contar_titulos():
-    data = extraer(url= 'some url api json')
-    titulos = {}
-    for i in range(11):
-        contador_titulos = 0
-        for x in data:            
-            if x["userId"] == i and x["completed"] == True:
-                contador_titulos += 1
-                titulos[i] = contador_titulos
-    return titulos
+def contar_ocurrencias_json(url:str,cantidad_id:int,clave:str,condicion:any)->dict:
+    """
+    Toma un Json. Cuenta la cantidad de veces que cada id tiene una clave que
+    cumple una condicion. 
+    Recibe: url del json. La cantidad de ids. La clave y condicion a buscar.
+    Retorna: un dict vinculando cada id a su cantidad.
+    """
+    data = convertir_json_a_dict(url=url)
+    cantidad_de_cada_id = {}
+    for i in range(cantidad_id):
+        contador = 0
+        for user in data:            
+            if user["id"] == i and user[clave] == condicion:
+                contador += 1
+        cantidad_de_cada_id[i] = contador
+    return cantidad_de_cada_id
