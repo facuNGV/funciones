@@ -226,6 +226,8 @@ def obtener_valor_por_clave(clave:any)->function:
     Recibe: la clave a partir de la cual se ordenara la lista
     Retorna: una función que será recibida y utilizada por key= 
     """
+    # tambien se podria hacer solo un return lambda como abajo
+    # return lambda diccionario: diccionario.get(clave, None)
     def extractor(diccionario):
         return diccionario.get(clave, None)
     return extractor
