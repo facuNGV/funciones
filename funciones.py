@@ -218,6 +218,19 @@ def determinar_numero(dato:str)->bool|str:
 '''
 Situacionales
 '''
+def obtener_valor_por_clave(clave:any)->function:
+    """
+    Sirve cuando aplicamos sort a una lista de diccionarios, para establecer
+    como criterio de ordenamiento una clave determinada. Pasar esta funcion
+    como valor del key=
+    Recibe: la clave a partir de la cual se ordenara la lista
+    Retorna: una función que será recibida y utilizada por key= 
+    """
+    def extractor(diccionario):
+        return diccionario.get(clave, None)
+    return extractor
+
+
 def descuento_condicionado(importe_venta, montos_descuentos:dict):
     """
     A partir de un diccionario(clave=tupla, valor=numero) y un importe, segun
