@@ -37,7 +37,7 @@ def solicitar_y_validar_numero_en_rango(
     return numero
 
 
-def solicitar_y_validar_string(
+def solicitar_string_y_validar_con_opciones_y_longitud(
         mensaje:str, opciones:list|str, 
         mensaje_error:str, longitud:int=None
         )->str:
