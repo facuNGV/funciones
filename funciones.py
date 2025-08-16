@@ -654,10 +654,9 @@ def generar_lista_ASCII(
         primer_caracter:int, ultimo_caracter:int
         )->list:
     """
-    Genera una lista, cuyos elementos serán números dentro de un rango indicado
-    transformados a sus equivalentes en carácteres ASCII.
+    Genera una lista de números dentro de un rango, los convierte a ASCII.
     Recibe: rango numérico.
-    Retorna: lista con los números transformados en ASCII.
+    Retorna: lista con los caracteres ASCII.
     """
     lista_caracteres = []
     for numero in range(primer_caracter, ultimo_caracter+1):
@@ -670,12 +669,9 @@ def generar_lista_ASCII_aleatorios(
         cantidad_elementos:int, minimo:int, maximo:int
         )->list:
     """
-    Genera una lista con una cantidad de elementos indicada, cada elemento será
-    un número aleatorio dentro de un rango indicado que fue transformado a su 
-    equivalente en caracter ASCII.
-    Recibe: cantidad de elementos, rango numérico entre el cual se generaran los
-    numeros aleatorios que se convertiran en su equivalente ASCII.
-    Retorna: lista con los numeros transformados en ASCII.
+    Genera lista de numeros aleatorios, los convierte a ASCII.
+    Recibe: cantidad de elementos, rango numérico para los números aleatorios.
+    Retorna: lista con los caracteres ASCII.
     """
     lista_letras_aleatorias = []
     for _ in range(cantidad_elementos):
