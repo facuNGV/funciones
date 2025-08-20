@@ -218,7 +218,7 @@ def determinar_numero(dato:str)->bool|str:
 '''
 Situacionales
 '''
-def obtener_valor_por_clave(clave:any)->function:
+def obtener_valor_por_clave(clave:any):
     """
     Sirve cuando aplicamos sort a una lista de diccionarios, para establecer
     como criterio de ordenamiento una clave determinada. Pasar esta funcion
