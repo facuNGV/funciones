@@ -799,7 +799,7 @@ def buscar_elemento_en_matriz(matriz:list, elemento:any)->bool:
     return bandera_numero_repetido
 
 
-def cargar_matriz_numeros_aleatorios_rango_1_9(
+def cargar_matriz_elementos_aleatorios_sin_repetir(
         matriz:list, minimo:int = 1, maximo:int = 9
         )->None:
     """
@@ -816,7 +816,7 @@ def cargar_matriz_numeros_aleatorios_rango_1_9(
             matriz[i][j] = numero_random
 
 
-def llenar_matriz_aleatoriamente(matriz_vacia:list, desde:int=0, hasta:int=9)->None:
+def cargar_matriz_elementos_aleatorios(matriz_vacia:list, desde:int=0, hasta:int=9)->None:
     """
     Carga una matriz con números aleatorios dentro de un rango indicado.
     Recibe: una matriz, un rango numérico.
